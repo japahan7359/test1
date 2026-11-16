@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ✏️ 수정: 브라우저 탭에 보이는 제목 -->
+  <title>이름 | 자기소개</title>
+  <meta name="description" content="이름의 개인 웹사이트입니다.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐒</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="sky">
+      <div class="hero-text">
+        <!-- ✏️ 수정: 이름과 한 줄 소개 -->
+        <h1>안녕하세요, 이름입니다.</h1>
+        <p class="tagline">천천히 배우고, 꾸준히 만드는 사람</p>
+      </div>
+
+      <!-- 온천의 김 (장식) -->
+      <span class="steam s1" aria-hidden="true"></span>
+      <span class="steam s2" aria-hidden="true"></span>
+      <span class="steam s3" aria-hidden="true"></span>
+      <span class="steam s4" aria-hidden="true"></span>
+
+      <!-- 온천에 몸을 담근 원숭이 (순수 CSS 일러스트, 장식) -->
+      <div class="stage-wrap" aria-hidden="true">
+        <div class="stage">
+          <div class="monkey">
+            <div class="face">
+              <div class="eyes"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pool">
+      <a class="hint" href="#about">소개 보기</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="section-grid">
+        <h2 id="about-title">소개</h2>
+        <div class="prose">
+          <!-- ✏️ 수정: 자기소개 문단 -->
+          <p>배우면서 만드는 일을 좋아합니다. 이 페이지는 마크다운 연습에서 시작해, GitHub에 올리고 웹페이지로 배포하는 과정을 직접 해 보며 만든 첫 개인 사이트예요.</p>
+          <p>(이 문단은 예시예요. 하고 있는 일이나 관심사, 앞으로 해 보고 싶은 것을 적어 주세요.)</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="section-grid">
+        <h2 id="contact-title">연락</h2>
+        <ul class="link-list">
+          <li>
+            <a href="https://github.com/japahan7359">
+              <span class="link-label">GitHub</span>
+              <span class="link-value">japahan7359</span>
+            </a>
+          </li>
+          <li>
+            <!-- ✏️ 수정: 이메일 주소 (공개 저장소에 그대로 노출되니 공개해도 되는 주소만 쓰세요) -->
+            <a href="mailto:your-email@example.com">
+              <span class="link-label">이메일</span>
+              <span class="link-value">your-email@example.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <!-- ✏️ 수정: 이름 -->
+    <p>© 2026 이름</p>
+    <p>원숭이 일러스트는 <a href="https://codepen.io/cassidoo">Cassidy(@cassidoo)</a>의 CodePen 작품을 참고해 다시 만들었어요.</p>
+  </footer>
+
+</body>
+</html>

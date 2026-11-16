@@ -1,0 +1,422 @@
+/* ==========================================================
+   색상 · 글꼴 (여기만 바꿔도 사이트 분위기가 바뀝니다)
+   ========================================================== */
+:root {
+  /* 원숭이 */
+  --white: #fffaf2;
+  --red: #d63a3a;
+  --pink: #f0707f;
+  --black: #5a1f1f;
+
+  /* 하늘과 온천 */
+  --sky-top: #5fa9a2;
+  --sky-mid: #93c7b4;
+  --sky-low: #f2b48d;
+  --pool-top: #3f8f87;
+  --pool-bottom: #2a716c;
+
+  /* 본문 */
+  --page: #e8f3ef;
+  --ink: #3d1a1c;
+  --ink-soft: #6a4546;
+  --accent: #b3262f;
+
+  --font-display: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  /* 원숭이 크기 배율 (화면이 작으면 줄어듭니다) */
+  --s: 1;
+}
+
+@media (max-width: 600px), (max-height: 760px) { :root { --s: 0.8; } }
+@media (max-width: 400px), (max-height: 620px) { :root { --s: 0.62; } }
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;      /* 한국어는 단어 단위로 줄바꿈 */
+  overflow-wrap: break-word; /* 너무 긴 주소는 예외적으로 끊기 */
+}
+
+h1, h2, .tagline { text-wrap: balance; }
+
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ==========================================================
+   첫 화면 (히어로)
+   ========================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    var(--sky-top) 0%,
+    var(--sky-mid) 45%,
+    var(--sky-low) 80%,
+    var(--sky-low) 100%
+  );
+}
+
+.sky {
+  position: relative;
+  z-index: 2; /* 원숭이가 물 위로 올라오도록 */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  padding: clamp(32px, 9svh, 96px) 24px 0;
+  text-align: center;
+  color: var(--black);
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  margin: 0.6rem 0 0;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+}
+
+/* ---------- 온천 물 ---------- */
+.pool {
+  position: relative;
+  z-index: 1;
+  height: calc(clamp(110px, 18svh, 170px) + 40px);
+  padding-bottom: 40px; /* 아래 섹션이 겹치는 만큼 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, var(--pool-top), var(--pool-bottom));
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.35);
+}
+
+.hint {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.hint::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(45deg); }
+  50%      { transform: translateY(5px) rotate(45deg); }
+}
+
+/* ---------- 온천의 김 ---------- */
+.steam {
+  position: absolute;
+  bottom: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(22px);
+  opacity: 0;
+  pointer-events: none;
+  animation: steam 9s ease-in infinite;
+}
+.steam.s1 { left: 18%; animation-delay: 0s; }
+.steam.s2 { left: 36%; animation-delay: 3s; }
+.steam.s3 { left: 60%; animation-delay: 1.5s; }
+.steam.s4 { left: 78%; animation-delay: 5s; }
+
+@keyframes steam {
+  0%   { opacity: 0;    transform: translateY(0) scale(0.8); }
+  25%  { opacity: 0.55; }
+  100% { opacity: 0;    transform: translateY(-190px) scale(1.5); }
+}
+
+/* ==========================================================
+   원숭이 (CodePen 작품을 참고해 색과 배치만 조정)
+   ========================================================== */
+.stage-wrap {
+  position: relative;
+  flex: none;
+  width: calc(350px * var(--s));
+  height: calc(360px * var(--s));
+  margin-bottom: calc(-45px * var(--s)); /* 물에 잠기도록 아래로 내림 */
+}
+
+.stage {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 350px;
+  height: 360px;
+  transform: scale(var(--s));
+  transform-origin: left bottom;
+  filter: drop-shadow(0 12px 16px rgba(90, 31, 31, 0.22));
+}
+
+.monkey {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 250px;
+  background: var(--white);
+  border-radius: 225px;
+}
+
+.monkey::before {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 100px solid var(--white);
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 0;
+  width: 125px;
+}
+
+.monkey::after {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: -110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 25px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  animation: water 2s infinite ease-in;
+}
+
+.face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 60px;
+  background: var(--red);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  animation: move-face 5s ease-in-out infinite;
+}
+
+.face::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--red), var(--pink));
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+}
+
+.face::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid var(--black);
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+}
+
+.eyes {
+  position: relative;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--red), var(--pink));
+}
+
+.eyes::before,
+.eyes::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -25px;
+  width: 30px;
+  height: 30px;
+  border-bottom: 5px solid var(--black);
+  border-radius: 50%;
+  animation: move-eyes 10s ease-in-out infinite;
+}
+
+.eyes::before { left: -35px; }
+.eyes::after  { left: 35px; }
+
+@keyframes water {
+  0%   { opacity: 0; width: 200px; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; width: 400px; }
+}
+
+@keyframes move-face {
+  0%   { top: 50%; }
+  25%  { top: 48%; transform: translateX(-50%) rotate(1deg); }
+  50%  { top: 48%; transform: translateX(-50%) rotate(-1deg); }
+  100% { top: 50%; }
+}
+
+@keyframes move-eyes {
+  0%   { margin-left: 0; }
+  25%  { margin-left: 5px; }
+  75%  { margin-left: -5px; }
+  100% { margin-left: 0; }
+}
+
+/* ==========================================================
+   본문 섹션
+   ========================================================== */
+.about {
+  position: relative;
+  margin-top: -40px; /* 물가처럼 곡선으로 시작 */
+  padding: 88px 24px 40px;
+  background: var(--page);
+  border-top-left-radius: 50% 40px;
+  border-top-right-radius: 50% 40px;
+}
+
+.contact {
+  padding: 24px 24px 72px;
+}
+
+.section-grid {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px 48px;
+}
+
+@media (min-width: 760px) {
+  .section-grid { grid-template-columns: 160px 1fr; }
+}
+
+h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 1.3;
+  color: var(--accent);
+}
+
+.prose { max-width: 34em; }
+.prose p { margin: 0 0 1.1em; }
+.prose p:last-child { margin-bottom: 0; }
+
+/* ---------- 링크 ---------- */
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.link-list a {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 22px 12px;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.link-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--accent);
+  transition: color 0.2s;
+}
+
+.link-value {
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+.link-list a:hover,
+.link-list a:focus-visible {
+  background: var(--accent);
+  color: var(--white);
+}
+.link-list a:hover .link-label,
+.link-list a:focus-visible .link-label {
+  color: var(--white);
+}
+
+/* ---------- 푸터 ---------- */
+.site-footer {
+  padding: 24px 24px 48px;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.site-footer p { margin: 0; }
+.site-footer a { color: inherit; }
+
+/* ==========================================================
+   움직임을 줄이고 싶은 사용자 설정 존중
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .steam { display: none; }
+}
